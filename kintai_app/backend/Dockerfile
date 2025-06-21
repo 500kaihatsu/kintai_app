@@ -1,17 +1,21 @@
-﻿FROM eclipse-temurin:17-jdk-alpine
-
+FROM openjdk:17-jdk-slim
 WORKDIR /app
 
+RUN apt-get update && apt-get install -y netcat
+
+# Maven関連を先にコピー（ビルドキャッシュ活用のため）
+COPY .mvn .mvn
+COPY mvnw .
+
+# wait-for-it.sh をコピーして実行権限を付与
+COPY wait-for-it.sh .
+RUN chmod +x wait-for-it.sh mvnw
+
+# 残りをコピー
 COPY . .
-RUN chmod +x mvnw
 
-# Maven Wrapper に実行権限を追加
-RUN chmod +x ./mvnw
+# ビルド実行
+RUN ./mvnw package -DskipTests
 
-# テストはスキップしてビルド（ビルドエラー回避のため先に依存解決）
-RUN ./mvnw clean package -DskipTests
-
-EXPOSE 8080
-
-CMD ["./mvnw", "-X", "spring-boot:run"]
+CMD ["./wait-for-it.sh", "db", "5432", "--", "java", "-jar", "target/backend-0.0.1-SNAPSHOT.jar"]
 

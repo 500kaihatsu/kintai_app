@@ -1,0 +1,95 @@
+body, html, #root {
+  margin: 0; padding: 0; height: 100%;
+  background-color: #f0f2f5; /* 薄いグレー背景 */
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.layout {
+  display: flex;
+  height: 100vh;
+}
+
+.sidebar {
+  width: 220px;
+  background-color: #2f8de4;
+  color: white;
+  padding: 20px 10px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+}
+
+.sidebar ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.sidebar li {
+  padding: 12px 10px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  color: white;
+}
+
+/* ✅ 追加: <Link>（aタグ）にも白い文字色を適用 */
+.sidebar li a {
+  color: white;
+  text-decoration: none;
+}
+
+/* ✅ ホバー時も白いまま */
+.sidebar li a:hover {
+  text-decoration: underline;
+  color: white;
+}
+
+.sidebar li:hover,
+.sidebar li.active {
+  background-color: #2163b0;
+  color: white;
+}
+
+.sidebar li .icon {
+  margin-right: 10px;
+  font-size: 18px;
+}
+
+.main-content {
+  flex: 1;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 8px;
+  margin: 16px;
+  overflow-y: auto;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+/* コンテンツのカード風セクション */
+.card {
+  background-color: #fff;
+  border-radius: 6px;
+  padding: 20px;
+  margin-bottom: 20px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+.card h2 {
+  margin-top: 0;
+  font-weight: 600;
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 8px;
+  margin-bottom: 20px;
+  font-size: 1.25rem;
+}
+
+/* リンクの色（共通） */
+a {
+  color: #007bff;
+  text-decoration: none;
+}
+a:hover {
+  text-decoration: underline;
+}
+
